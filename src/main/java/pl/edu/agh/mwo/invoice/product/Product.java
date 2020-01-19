@@ -27,7 +27,7 @@ public abstract class Product {
 		return this.taxPercent;
 	}
 
-	public BigDecimal getPriceWithTax() {
-		return null;
+	public BigDecimal getPriceWithTax() {	
+		return this.price.add(this.price.multiply(this.taxPercent));
 	}
 }
