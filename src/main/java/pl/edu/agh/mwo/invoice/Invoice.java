@@ -46,4 +46,13 @@ public class Invoice {
     public int getNumber() {
         return number;
     }
+
+	public String getProductsList() {
+		String productsList = "Numer faktury: " + getNumber() + "\n";
+        for (Product product : products.keySet()) {
+            productsList = productsList + product.getName() + ", " + products.get(product) + ", " + product.getPrice() + "\n";
+        }
+        productsList = productsList + "Liczba pozycji: " + products.size();
+        return productsList;
+	}
 }
