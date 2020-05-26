@@ -151,5 +151,24 @@ public class InvoiceTest {
         Assert.assertThat(invoiceProductsList, Matchers.containsString("Liczba pozycji: 4"));
     }
 
-  
+    @Test
+    public void testTheSameProductListedAsOnePosition(){
+        invoice.addProduct(new OtherProduct("taboret", new BigDecimal("1")), 1);
+        invoice.addProduct(new OtherProduct("taboret", new BigDecimal("1")), 2);
+        invoice.addProduct(new TaxFreeProduct("pączek", new BigDecimal("0.5")), 4);
+
+        
+        String invoiceProductsList = invoice.getProductsList();
+        Assert.assertThat(invoiceProductsList, Matchers.containsString("Liczba pozycji: 2"));
+    }
+
+    @Test
+    public void testTheSameProductListedAsOnePositionWithCorrectQuantity(){
+    	invoice.addProduct(new OtherProduct("taboret", new BigDecimal("1")), 1);
+        invoice.addProduct(new OtherProduct("taboret", new BigDecimal("1")), 2);
+        String invoiceProductsList = invoice.getProductsList();
+        Assert.assertThat(invoiceProductsList, Matchers.containsString("taboret, 3, 1"));
+    }
+
+      
 }

@@ -17,8 +17,23 @@ public class Invoice {
     public void addProduct(Product product, Integer quantity) {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
+        } else if (products.isEmpty()) {
+            products.put(product, quantity);
+        } else {
+            boolean status = false;
+            for (Product p : products.keySet()) {
+                String productName = product.getName();
+                String newProductName = p.getName();
+                if (productName.equals(newProductName)) {
+                    status = true;
+                    int newProductQuantity = products.get(p) + quantity;
+                    products.replace(p, newProductQuantity);
+                }
+            }
+            if (!status) {
+                products.put(product, quantity);
+            }
         }
-        products.put(product, quantity);
     }
 
     public BigDecimal getNetTotal() {
